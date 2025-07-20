@@ -1,4 +1,4 @@
-package celestedevelopment.event
+package com.celeste.event
 
 interface IEventBus
 {

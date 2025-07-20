@@ -1,4 +1,4 @@
-package celestedevelopment.event
+package com.celeste.event
 
 import kotlinx.coroutines.*
 import java.util.concurrent.ConcurrentHashMap

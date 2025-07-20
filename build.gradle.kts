@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm") version "2.1.21"
 }
 
-group = "celestedevelopment.event"
+group = "com.celeste.event"
 version = "0.1"
 
 repositories {
