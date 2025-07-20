@@ -15,6 +15,7 @@ repositories {
 
 java {
     withSourcesJar()
+    withJavadocJar()
 }
 
 dependencies {
@@ -26,7 +27,6 @@ dependencies {
 }
 
 tasks {
-
     test {
         useJUnitPlatform()
     }
@@ -40,4 +40,14 @@ kotlin {
     jvmToolchain(21)
 }
 
-publishing.publications.create<MavenPublication>("maven").from(components["java"])
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "com.celeste"
+            artifactId = "event"
+            version = "0.1"
+
+            from(components["java"])
+        }
+    }
+}
