@@ -1,4 +1,8 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
+    `maven-publish`
     kotlin("jvm") version "2.1.21"
 }
 
@@ -9,6 +13,10 @@ repositories {
     mavenCentral()
 }
 
+java {
+    withSourcesJar()
+}
+
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
@@ -17,10 +25,19 @@ dependencies {
     implementation("org.slf4j:slf4j-simple:2.0.7")
 }
 
-tasks.test {
-    useJUnitPlatform()
+tasks {
+
+    test {
+        useJUnitPlatform()
+    }
+
+    withType<KotlinCompile> {
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_21)
+    }
 }
 
 kotlin {
     jvmToolchain(21)
 }
+
+publishing.publications.create<MavenPublication>("maven").from(components["java"])
