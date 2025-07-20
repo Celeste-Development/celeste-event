@@ -1,9 +1,6 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    `maven-publish`
     kotlin("jvm") version "2.1.21"
+    id("maven-publish")
 }
 
 group = "com.celeste"
@@ -26,14 +23,8 @@ dependencies {
     implementation("org.slf4j:slf4j-simple:2.0.7")
 }
 
-tasks {
-    test {
-        useJUnitPlatform()
-    }
-
-    withType<KotlinCompile> {
-        compilerOptions.jvmTarget.set(JvmTarget.JVM_21)
-    }
+tasks.test {
+    useJUnitPlatform()
 }
 
 kotlin {
@@ -42,11 +33,7 @@ kotlin {
 
 publishing {
     publications {
-        create<MavenPublication>("maven") {
-            groupId = "com.celeste"
-            artifactId = "event"
-            version = "0.1"
-
+        create<MavenPublication>("mavenJava") {
             from(components["java"])
         }
     }
